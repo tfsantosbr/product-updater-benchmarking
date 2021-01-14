@@ -13,7 +13,7 @@ namespace ProductIteratorApp
         {
             var idLoja = Convert.ToInt16(args[0]);
             var caminhoArquivo = $"C:/Users/tfsan/Projetos/Sitemercado/@arquivos/produtos-loja-{idLoja}.csv";
-            var topic = $"topico-loja-{idLoja}";
+            var topic = "product-updater";
             var config = new ProducerConfig
             {
                 BootstrapServers = "localhost:9091,localhost:9092,localhost:9093"
@@ -62,15 +62,7 @@ namespace ProductIteratorApp
                 new Message<Null, string>
                 { Value = linha });
 
-            Console.WriteLine($"[Mensagem Enviada] \n" +
-                $"Topico: {topic} \n" +
-                $"Mensagem: {linha} \n" +
-                $"Status: {result.Status}");
-        }
-
-        private static bool ValoresValidos(string[] valores)
-        {
-            return valores.Length == 7;
+            Console.WriteLine($"[Enviada] -> {linha}");
         }
     }
 }
